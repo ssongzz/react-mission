@@ -3,22 +3,24 @@ import UserProfile from './components/UserProfile';
 import './App.css'
 
 function App() {
-  const [user, setUser] = useState({
-    name: 'scl',
-    job: 'Publisher'
-  })
+  const userList = [
+    { id: 1, name: 'scl', job: 'Publisher' },
+    { id: 2, name: 'kim', job: 'Designer' },
+    { id: 3, name: 'lee', job: 'Developer' }
+  ];
 
-  const updateName = () => {
-    setUser({
-      ...user, // 전개연산자로 덮어쓰기 되므로 앞으로 가져와야 함
-      name: 'songcl'
-    })
-  }
+  const [user, setUser] = useState(userList);
 
   return (
     <>
-      <UserProfile item={user} />
-      <button type="button" onClick={updateName}>CHANGE</button>
+      {
+        userList.map((user) => (
+          <div className="card" key={user.id}>
+            <h2>{user.name}</h2>
+            <p>{user.job}</p>
+          </div>
+        ))
+      }
     </>
   )
 }
