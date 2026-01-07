@@ -14,11 +14,8 @@ function App() {
   return (
     <>
       {
-        userList.map((user) => (
-          <div className="card" key={user.id}>
-            <h2>{user.name}</h2>
-            <p>{user.job}</p>
-          </div>
+        user.map((item) => (
+          <UserProfile key={item.id} item={item} />
         ))
       }
     </>
