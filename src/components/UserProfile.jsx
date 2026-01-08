@@ -4,7 +4,9 @@ function UserProfile({ item }) {
     return (
         <div className="card">
             <h2>{item.name}</h2>
-            <p>{item.job}</p>
+            {
+                item.job === '미지정'? <p className='txtMail'>{item.email}</p> : <p>{item.job}</p>
+            }
         </div>
     )
 }
