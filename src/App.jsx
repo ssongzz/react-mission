@@ -5,14 +5,14 @@ import './App.css'
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState([]);
+
   const userList = [
     { id: 1, name: 'scl', job: 'Publisher' },
     { id: 2, name: 'kim', job: 'Designer' },
     { id: 3, name: 'lee', job: 'Developer' }
   ];
-
-  const [user, setUser] = useState([]);
-
+  
   useEffect(() => {
     setLoading(true);
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -28,34 +28,57 @@ function App() {
     });
   }, []);
 
+  const [search, setSearch] = useState('');
+  const onSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredUser = user.filter((item) => {
+    return item.name.toLowerCase().includes(search.toLowerCase());
+  });
+
   return (
     <>
       {
         loading === true ? (
           <div className="loading-spinner">데이터를 불러오는 중입니다...</div> 
         ) : (
-          <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Info(job or email)</th>
-                </tr>
-            </thead>
-            <tbody>
-            {
-              user.map((item, idx) => (
-                <UserProfile 
-                  key={idx}
-                  item={{
-                    name: item.name,
-                    job: item.job || '미지정',
-                    email: item.email || '미지정' 
-                  }}
-                />
-              ))
-            }
-            </tbody>
-          </table>
+          <>
+            <div className="tblfilter">
+              <input type="text" placeholder="name" onChange={onSearch} />
+              <div>{search}</div>
+            </div>
+            <table>
+              <thead>
+                  <tr>
+                      <th>No</th>
+                      <th>Name</th>
+                      <th>Info(job or email)</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {
+                filteredUser.length === 0 ? (
+                  <tr>
+                    <td colSpan="3">검색 결과가 없습니다.</td>
+                  </tr>
+                ) : (
+                  filteredUser.map((item, idx) => (
+                    <UserProfile 
+                      key={idx}
+                      item={{
+                        num: idx + 1,
+                        name: item.name,
+                        job: item.job || '미지정',
+                        email: item.email || '미지정' 
+                      }}
+                    />
+                  ))
+                )
+              }
+              </tbody>
+            </table>
+          </>
         )
       }
     </>
