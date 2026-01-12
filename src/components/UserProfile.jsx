@@ -3,6 +3,7 @@ import { useState } from 'react'
 function UserProfile({ item }) {
   return (
     <tr>
+      <td>{item.num}</td>
       <td>{item.name}</td>
       {
           item.job === '미지정'? (
