@@ -34,16 +34,28 @@ function App() {
         loading === true ? (
           <div className="loading-spinner">데이터를 불러오는 중입니다...</div> 
         ) : (
-          user.map((item, idx) => (
-            <UserProfile 
-              key={idx}
-              item={{
-                name: item.name,
-                job: item.job || '미지정',
-                email: item.email || '미지정' 
-              }}
-            />
-          ))
+          <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Info(job or email)</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+              user.map((item, idx) => (
+                <UserProfile 
+                  key={idx}
+                  item={{
+                    name: item.name,
+                    job: item.job || '미지정',
+                    email: item.email || '미지정' 
+                  }}
+                />
+              ))
+            }
+            </tbody>
+          </table>
         )
       }
     </>
