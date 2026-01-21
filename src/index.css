@@ -22,6 +22,7 @@ body {
 }
 
 button {
+  width: 100%;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -50,6 +51,15 @@ button.btn-delete:hover {
   background-color: #b91c1c;
 }
 
+/* 등록 버튼 (Blue 계열) */
+button.btn-register {
+  background-color: #2563eb;
+  color: #fff;
+}
+button.btn-register:hover {
+  background-color: #1d4ed8;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -63,5 +73,11 @@ button.btn-delete:hover {
   }
   button.btn-delete:hover {
     background-color: #dc2626;
+  }
+  button.btn-register {
+    background-color: #3b82f6;
+  }
+  button.btn-register:hover {
+    background-color: #2563eb;
   }
 }

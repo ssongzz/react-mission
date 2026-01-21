@@ -55,12 +55,29 @@ function App() {
           <div className="loading-spinner">데이터를 불러오는 중입니다...</div> 
         ) : (
           <div className="tblWrap">
-            <div className="tblfilter">
-              <div className="searchItem">
-                <span>이름</span>
-                <input type="text" placeholder="name" onChange={onSearch} />
+            <div className="boxWrap">
+              <h2>등록</h2>
+              <div className="formGroup">
+                <div className="inputItem">
+                  <label>이름</label>
+                  <input type="text" placeholder="이름을 입력하세요" />
+                </div>
+                <div className="inputItem">
+                  <label>직업</label>
+                  <input type="text" placeholder="직업을 입력하세요" />
+                </div>
+                <button type="button" className="btn-register">등록</button>
               </div>
             </div>
+            
+            <div className="boxWrap">
+              <h2>검색</h2>
+              <div className="inputItem">
+                <label>이름</label>
+                <input type="text" placeholder="이름으로 검색" onChange={onSearch} />
+              </div>
+            </div>
+            
             <table>
               <thead>
                   <tr>

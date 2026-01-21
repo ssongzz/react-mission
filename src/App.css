@@ -13,21 +13,48 @@
   width: 800px;
 }
 
-.tblfilter {
+.boxWrap {
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   background: #eee;
+  border-radius: 8px;
+  text-align: left;
 }
 
-.tblfilter .searchItem {
+.boxWrap + .boxWrap {
+  margin-top: 1rem;
+}
+
+.boxWrap h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  display: inline-block;
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.inputItem {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.tblfilter input {
+.inputItem + .inputItem,
+.inputItem + button {
+  margin-top: .5rem;
+}
+
+.inputItem label {
+  width: 10%;
+}
+
+.inputItem input {
+  width: 100%;
   height: 40px;
+  border: 0;
+  border-radius: 8px;
 }
 
 table {
