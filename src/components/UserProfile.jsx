@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function UserProfile({ item }) {
+function UserProfile({ item, onDelete }) {
   return (
     <tr>
       <td>{item.num}</td>
@@ -12,6 +12,7 @@ function UserProfile({ item }) {
               <td>{item.job}</td>
           )
       }
+      <td><button type="button" className="btn-delete" onClick={() => onDelete(item.num)}>삭제</button></td>
     </tr>
   )
 }

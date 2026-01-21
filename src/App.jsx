@@ -21,7 +21,10 @@ function App() {
       // console.log(data);
       const totalUserList = [
         ...userList,
-        ...data
+        ...data.map(item => ({
+          ...item,
+          id: item.id + userList.length
+        }))
       ];
       setUser(totalUserList);
       setLoading(false);
@@ -37,37 +40,49 @@ function App() {
     return item.name.toLowerCase().includes(search.toLowerCase());
   });
 
+  const onDelete = (num) => {
+    const newUserList = user.filter((item) => {
+      return item.id !== num;
+    });
+    setUser(newUserList);
+    console.log(newUserList)
+  };
+
   return (
     <>
       {
         loading === true ? (
           <div className="loading-spinner">데이터를 불러오는 중입니다...</div> 
         ) : (
-          <>
+          <div className="tblWrap">
             <div className="tblfilter">
-              <input type="text" placeholder="name" onChange={onSearch} />
-              <div>{search}</div>
+              <div className="searchItem">
+                <span>이름</span>
+                <input type="text" placeholder="name" onChange={onSearch} />
+              </div>
             </div>
             <table>
               <thead>
                   <tr>
-                      <th>No</th>
-                      <th>Name</th>
-                      <th>Info(job or email)</th>
+                      <th>번호</th>
+                      <th>이름</th>
+                      <th>직업 or 메일주소</th>
+                      <th>삭제</th>
                   </tr>
               </thead>
               <tbody>
               {
                 filteredUser.length === 0 ? (
                   <tr>
-                    <td colSpan="3">검색 결과가 없습니다.</td>
+                    <td colSpan="4">검색 결과가 없습니다.</td>
                   </tr>
                 ) : (
                   filteredUser.map((item, idx) => (
                     <UserProfile 
-                      key={idx}
+                      key={item.id}
+                      onDelete={onDelete}
                       item={{
-                        num: idx + 1,
+                        num: item.id,
                         name: item.name,
                         job: item.job || '미지정',
                         email: item.email || '미지정' 
@@ -78,7 +93,7 @@ function App() {
               }
               </tbody>
             </table>
-          </>
+          </div>
         )
       }
     </>
